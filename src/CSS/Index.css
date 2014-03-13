@@ -1,0 +1,151 @@
+@CHARSET "UTF-8";
+
+@font-face
+{
+	font-family:gillSans;
+	src: url('../Font/Gill Sans.ttf');
+}
+@font-face
+{
+	font-family:chalkduster;
+	src: url('../Font/Chalkduster.ttf');
+}
+@font-face
+{
+	font-family:chalkduster-alternate;
+	src: url('../Font/chalkduster-webfont.ttf') format('truetype');
+}
+body
+{
+	background-color:#740202;
+}
+div.main
+{
+	width:990px;
+	margin-left:auto;
+	margin-right:auto;
+	display:none;
+}
+div.logo
+{
+	position:relative;
+	top:-100px;
+	text-align:center;
+	width:400px;
+	margin-left:auto;
+	margin-right:auto;
+}
+div.logo img
+{
+	width:250px;
+	height:auto;
+}
+div.countdown
+{
+	position:relative;
+	width:300px;
+	height:100px;
+	top:0px;
+	right:0px;
+	left:690px;
+	text-align:center;
+}
+span.countdownTitle
+{
+	font-size:15px;
+	font-family:gillSans,sans-serif;
+	color:white;
+}
+span.countdownNumber
+{
+	font-size:40px;
+	font-family:chalkduster,chalkduster-alternate;
+	color:white;
+}
+div.title
+{
+	font-family:chalkduster,chalkduster-alternate;
+	font-size:45px;
+	text-align:center;
+	color:white;
+	position:relative;
+	top:15px;
+	text-shadow: 5px 5px 10px #000000;
+}
+
+div.mainTitle
+{
+	font-family:chalkduster,chalkduster-alternate;
+	font-size:40px;
+	font-weight:bold;
+	width:400px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color:white;
+	position:relative;
+	top:-85px;
+	background-color: black;
+	border: 1px solid;
+	border-color:black;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;
+	border-radius:50px;
+	box-shadow: 0px 0px 20px 5px #000000;
+}
+
+div.outsideTheCircle
+{
+	position:relative;
+}
+div.outerCircle
+{
+	width:750px;
+	height:750px;
+	border:2px solid;
+	border-color:yellow;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;	
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div.innerCircle
+{
+	width:380px;
+	height:380px;
+	border:2px solid;
+	border-color:yellow;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	border-radius:50%;	
+	position:relative;
+	top:180px;
+	margin-left:auto;
+	margin-right:auto;
+}
+div.name
+{
+	font-family:chalkduster,chalkduster-alternate;
+	color:white;
+	font-size:25px;
+	text-align: center;
+	text-shadow: 5px 5px 10px #000000;
+}
+.bottomBanner
+{
+	font-size:10px;
+	font-family:gillSans,sans-serif;
+	position:static;
+	bottom:0px;
+	right:0px;
+	color:#d6222e;
+	text-align:right;
+	text-decoration:none;
+}
+a.bottomBanner:hover
+{
+	color:white;
+}

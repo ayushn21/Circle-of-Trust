@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+
+div.users
+{
+	width:360px;
+	height:150px;
+	margin-left:100px;
+	margin-right:auto;
+	position:relative;
+	top:50px;
+	background-color: white;
+	border: 1px solid;
+	border-color:black;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;
+	border-radius:50px;
+	box-shadow: 0px 0px 30px 10px #000000;
+	text-align: center;
+}
+div.nandosDate
+{
+	width:360px;
+	height:275px;
+	margin-left:550px;
+	margin-right:auto;
+	position:absolute;
+	top:260px;
+	background-color: white;
+	border: 1px solid;
+	border-color:black;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;
+	border-radius:50px;
+	box-shadow: 0px 0px 30px 10px #000000;
+	text-align:center;
+}
+label.dateLabel
+{
+	font-family:gillSans,sans-serif;
+	font-size:25px;
+}
+table.dateTable
+{
+	position:relative;
+	margin-left:auto;
+	margin-right:auto;
+	top:30px;
+	width:250px;
+	height:100px;
+}
+
+div.controlButtons
+{
+	width:360px;
+	height:300px;
+	margin-left:550px;
+	margin-right:auto;
+	position:absolute;
+	top:600px;
+	background-color: white;
+	border: 1px solid;
+	border-color:black;
+	-webkit-border-radius:50px;
+	-moz-border-radius:50px;
+	border-radius:50px;
+	box-shadow: 0px 0px 30px 10px #000000;
+	text-align:center;
+}
+
+div.usersTitle
+{
+	font-family:chalkduster,chalkduster-alternate;
+	font-size:30px;
+	text-align:center;
+	color:#d6222e;
+	position:relative;
+	top:15px;
+	text-shadow: 1px 1px 2px #000000;
+	font-style:italic;
+}
+table.usersTable
+{
+	position:relative;
+	top:35px;
+	left:20px;
+}
+input.userTextBox
+{
+	width:150px;
+	height:25px;
+	font-size:18px;
+	font-family:sans-serif;
+	color:black;
+	background-color:#faffbd;
+	border: 2px solid;
+	border-color:black;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	border-radius:5px;
+	text-align:center;
+}
+
+
+input.circleTextBox
+{
+	width:40px;
+	height:23px;
+	text-align:center;
+}
+input.timeSpinner
+{
+	width:40px;
+	height:23px;
+	text-align:center;
+} 
+input.controlButton
+{
+	position:relative;
+}
+.no-close .ui-dialog-titlebar-close 
+{
+	display: none;
+}
+
+.errorMessage
+{
+	color:red;
+	font-style:italic;
+	display:none;
+}
+
+.dialogFormRow
+{
+
+}
