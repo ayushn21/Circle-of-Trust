@@ -12,7 +12,7 @@ Just download and host on a server supporting PHP. Homepage is Index.php and Int
 
 Default Login Details:
 
-Username: admin
+Username: admin    
 Password: Peri-Peri-Chicken!
 
 ### Technical Details
