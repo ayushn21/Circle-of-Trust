@@ -17,6 +17,9 @@ Password: Peri-Peri-Chicken!
 
 ### Technical Details
 
+EDIT: Currently in the process of being rewritted using PostgreSQL to enable deployment to Heroku.
+
+
 All functionality is coded using PHP, JavaScript, HTML, and CSS. No database is used, instead all data is stored in an XML file.
 
 Jquery UI is used for a lot of the UI elements.
@@ -24,4 +27,5 @@ Jquery UI is used for a lot of the UI elements.
 Default login details can be deleted after a new account has been created by modifying the users.xml file. No GUI system exists, sorry.
 
 Passwords are not stored in clear text. MD5 hashes are used.
+
 
