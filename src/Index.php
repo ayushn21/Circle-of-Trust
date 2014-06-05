@@ -15,80 +15,39 @@
 		<script src="jquery-1.9.1.js" ></script>
 		<script>
 			<?php 
-				$slotsWidth = "width:180px;";
-				
-				$innerCircleSlots = array(
-									   	  "top:170px; left:5px; ".$slotsWidth,
-										  "top:170px; left:190px; ".$slotsWidth,
-										  "top:50px; left:95px; ".$slotsWidth,
-										  "top:290px; left:95px; ".$slotsWidth,
-										  "top:130px; left:10px; ".$slotsWidth,
-										  "top:210px; left:10px; ".$slotsWidth,
-										  "top:130px; left:190px; ".$slotsWidth,
-										  "top:210px; left:190px; ".$slotsWidth,
-										  "top:90px; left:15px; ".$slotsWidth,
-										  "top:250px; left:15px; ".$slotsWidth,
-										  "top:90px; left:185px; ".$slotsWidth,
-										  "top:250px; left:185px; ".$slotsWidth
-										 );
-				
-				$outerCircleSlots = array(
-										  "top:290px; left:10px; ".$slotsWidth,
-										  "top:290px; left:560px; ".$slotsWidth,
-										  "top:430px; left:10px; ".$slotsWidth,
-										  "top:430px; left:560px; ".$slotsWidth,
-										  "top:165px; left:85px; ".$slotsWidth,
-										  "top:165px; left:475px; ".$slotsWidth,
-										  "top:550px; left:85px; ".$slotsWidth,
-										  "top:550px; left:475px; ".$slotsWidth,
-										  "top:75px; left:285px; ".$slotsWidth,
-										  "top:630px; left:285px; ".$slotsWidth);
-				
-				$outsideTheCircleSlots = array(
-											   "top:20px; left:70px; ".$slotsWidth,
-											   "top:20px; left:730px; ".$slotsWidth,
-											   "top:705px; left:70px; ".$slotsWidth,
-											   "top:705px; left:730px; ".$slotsWidth,
-											   "top:70px; left:30px; ".$slotsWidth,
-											   "top:70px; left:770px; ".$slotsWidth,
-											   "top:655px; left:30px; ".$slotsWidth,
-											   "top:655px; left:770px; ".$slotsWidth,
-											   "top:120px; left:0px; ".$slotsWidth,
-											   "top:120px; left:800px; ".$slotsWidth,
-											   "top:605px; left:0px; ".$slotsWidth,
-											   "top:605px; left:800px; ".$slotsWidth,
-
-
-											  );
-			
+				require("slots.php");
 			?>
 		
 			$(document).ready(function() 
-			{$('.main').fadeIn("slow");
+			{
+				$('.main').fadeIn("slow");
 			<?php 
-				$xmlDoc = simplexml_load_file("XML/names.xml");	
-				$names = $xmlDoc->names->children();
+				ob_start();
+				include "get_names.php";
+				$names = ob_get_clean();
+				$names = json_decode($names);
+				ob_end_clean();
 				
 				$innerCircleCounter = 0;
 				$outerCircleCounter = 0;
 				$outsideTheCircleCounter = 0;
 				$userCounter = 0;
 				
-				foreach ($names as $n)
+				foreach($names as $name => $position)
 				{
-					if($xmlDoc->circles->circle[$userCounter] == 3)
+					if($position == 3)
 					{
-						echo("$('.outsideTheCircle').prepend('<div class=\"name\" style=\"position:absolute;".$outsideTheCircleSlots[$outsideTheCircleCounter]."\">".$n."</div>');\n");
+						echo("$('.outsideTheCircle').prepend('<div class=\"name\" style=\"position:absolute;".$outsideTheCircleSlots[$outsideTheCircleCounter]."\">".$name."</div>');\n");
 						$outsideTheCircleCounter = $outsideTheCircleCounter + 1;
 					}
-					else if($xmlDoc->circles->circle[$userCounter] == 2)
+					else if($position == 2)
 					{
-						echo("$('.outerCircle').append('<div class=\"name\" style=\"position:absolute;".$outerCircleSlots[$outerCircleCounter]."\">".$n."</div>');\n");
+						echo("$('.outerCircle').append('<div class=\"name\" style=\"position:absolute;".$outerCircleSlots[$outerCircleCounter]."\">".$name."</div>');\n");
 						$outerCircleCounter = $outerCircleCounter + 1;
 					}
-					else if($xmlDoc->circles->circle[$userCounter] == 1)
+					else if($position == 1)
 					{
-						echo("$('.innerCircle').append('<div class=\"name\" style=\"position:absolute;".$innerCircleSlots[$innerCircleCounter]. "\">".$n."</div>');\n");
+						echo("$('.innerCircle').append('<div class=\"name\" style=\"position:absolute;".$innerCircleSlots[$innerCircleCounter]. "\">".$name."</div>');\n");
 						$innerCircleCounter = $innerCircleCounter + 1;
 					}
 					
@@ -99,27 +58,46 @@
 			?>
 				
 			});
-
 			<?php 
 					
-					$dateXML = simplexml_load_file("XML/date.XML");
-					
-					$nextNandos = new DateTime($dateXML->date);
-					$nextNandos->setTime((int)$dateXML->hour, (int)$dateXML->min);
+					ob_start();
+					include "get_date.php";
+					$date = ob_get_clean();
+					$date = json_decode($date);
+					ob_end_clean();
+
+					foreach ($date as $key => $value) 
+					{
+						if($key == "next_date")
+						{
+							$next_date = $value;
+						}
+						else if($key == "hour")
+						{
+							$hour = $value;
+						}
+						else if($key == "min")
+						{
+							$min = $value;
+						}
+					}
+
+					$next_nandos = new DateTime($next_date);
+					$next_nandos->setTime((int)$hour, (int)$min);
 
 				?>
 					var now = new Date();
-					var nextNandos = new Date(<?php echo($nextNandos->format('Y'));
+					var nextNandos = new Date(<?php echo($next_nandos->format('Y'));
 													echo(",");
-													echo(((int)$nextNandos->format('m'))-1);
+													echo(((int)$next_nandos->format('m'))-1);
 													echo(",");
-													echo($nextNandos->format('d'));
+													echo($next_nandos->format('d'));
 													echo(",");
-													echo((int)$nextNandos->format('H'));
+													echo((int)$next_nandos->format('H'));
 													echo(",");
-													echo($nextNandos->format('i'));
+													echo($next_nandos->format('i'));
 													echo(",");
-													echo($nextNandos->format('s'));
+													echo($next_nandos->format('s'));
 													echo(",");
 													echo("0");
 					?>);
@@ -171,8 +149,7 @@
 						}
 					}
 				}
-				document.getElementById("countdownTimer").innerHTML = days + "<span style=\"font-size:15px; font-family:sans-serif;\"> d </span>" + hours + "<span style=\"font-size:15px; font-family:sans-serif;\"> h </span>" + minutes + "<span style=\"font-size:15px; font-family:sans-serif;\"> m </span>" + seconds + "<span style=\"font-size:15px; font-family:sans-serif;\"> s</span>";
-				
+				document.getElementById("countdownTimer").innerHTML = days + "<span style=\"font-size:15px; font-family:sans-serif;\"> d </span>" + hours + "<span style=\"font-size:15px; font-family:sans-serif;\"> h </span>" + minutes + "<span style=\"font-size:15px; font-family:sans-serif;\"> m </span>" + seconds + "<span style=\"font-size:15px; font-family:sans-serif;\"> s</span>";	
 			} 
 
 		</script>
@@ -204,7 +181,7 @@
 		</div>
 		<br><br><br>
 		<div class="bottomBanner">
-			<a href="admin.php" class="bottomBanner">Admin</a> | Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
+			<a href="/admin" class="bottomBanner">Admin</a> | Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
 	</body>	
 	<!--

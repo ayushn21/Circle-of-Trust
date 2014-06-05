@@ -9,13 +9,13 @@
 		</script>
 		<![endif]-->
 		
-		<link rel="stylesheet" type="text/css" href="CSS/Index.css" />
-		<link rel="stylesheet" type="text/css" href="CSS/admin.css" />
-		<link rel="stylesheet" href="jquery-ui-1.10.2/themes/custom-theme/jquery-ui.css">
-		<link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="../CSS/Index.css" />
+		<link rel="stylesheet" type="text/css" href="../CSS/admin.css" />
+		<link rel="stylesheet" href="../jquery-ui-1.10.2/themes/custom-theme/jquery-ui.css">
+		<link rel="shortcut icon" type="image/x-icon" href="../Images/favicon.ico" />
 		
-		<script src="jquery-1.9.1.js" ></script>
-		<script src="jquery-ui-1.10.2/ui/jquery-ui.js"></script>
+		<script src="../jquery-1.9.1.js" ></script>
+		<script src="../jquery-ui-1.10.2/ui/jquery-ui.js"></script>
 		<script type="text/javascript">
 		
 		$(document).ready(function() 
@@ -41,7 +41,7 @@
 
 		function login()
 		{
-			$.post("Login/login.php",
+			$.post("../Login/login.php",
 					{
 						username:$("#username").val(),pwd:$("#pwd").val()
 					},
@@ -49,7 +49,7 @@
 					{
 						if(data == "success" && status == "success")
 						{
-							window.location = "controls.php";
+							window.location = "/admin/controls/";
 						}
 						else if(data == "failure" && status == "success")
 						{
@@ -87,7 +87,7 @@
 		<div class="main">
 		
 			<div class="logo">
-				<a href="Index.php"><img src="Images/Logo.gif"></a>
+				<a href="../"><img src="../Images/Logo.gif"></a>
 			</div>
 			
 			<div class="title">
@@ -150,12 +150,12 @@
 				</div>
 			</div>
 			<div class="goToCircle">
-			<span class="goToCircle"><a class="goToCircle" href="Index.php">Click here to go to the Circle</a></span>
+			<span class="goToCircle"><a class="goToCircle" href="../">Click here to go to the Circle</a></span>
 			<br><br><br><br><br>
 			</div>
 		</div>
 		<div class="bottomBanner" style="position:absolute;">
-			Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
+			Built by Ayush Newatia. &copy; <img src="../Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
 	</body>
 </html>

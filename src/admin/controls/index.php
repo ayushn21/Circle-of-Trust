@@ -11,16 +11,16 @@
 	<head>
 		<title>Nando's Circle of Trust: Administration</title>
 		
-		<link rel="stylesheet" type="text/css" href="CSS/Index.css" />
-		<link rel="stylesheet" type="text/css" href="CSS/admin.css" />
-		<link rel="stylesheet" type="text/css" href="CSS/controls.css" />
-		<link rel="stylesheet" href="jquery-ui-1.10.2/themes/dark-hive-red/jquery-ui.css">
-		<link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="../../CSS/Index.css" />
+		<link rel="stylesheet" type="text/css" href="../../CSS/admin.css" />
+		<link rel="stylesheet" type="text/css" href="../../CSS/controls.css" />
+		<link rel="stylesheet" href="../../jquery-ui-1.10.2/themes/dark-hive-red/jquery-ui.css">
+		<link rel="shortcut icon" type="image/x-icon" href="../../Images/favicon.ico" />
 		
-		<script src="jquery-1.9.1.js" ></script>
-		<script src="jquery-ui-1.10.2/ui/jquery-ui.js"></script>
-		<script src="Scripts/controls.js" ></script>
-		<script src="globalize.js" ></script>
+		<script src="../../jquery-1.9.1.js" ></script>
+		<script src="../../jquery-ui-1.10.2/ui/jquery-ui.js"></script>
+		<script src="../../Scripts/controls.js" ></script>
+		<script src="../../globalize.js" ></script>
 		
 		<script type="text/javascript">
 			$(document).ready(function() 
@@ -28,7 +28,7 @@
 				$('.main').fadeIn("slow");
 			<?php 
 						$namesXML = new DOMDocument();
-						$namesXML->load('XML/names.xml');
+						$namesXML->load('../../XML/names.xml');
 					
 						$nameNode = $namesXML->getElementsByTagName("name");
 						$circleNode = $namesXML->getElementsByTagName("circle");
@@ -231,7 +231,7 @@
 		<div class="main">
 		
 			<div class="logo">
-				<img src="Images/Logo.gif">
+				<img src="../../Images/Logo.gif">
 			</div>
 			
 			<div class="title">
@@ -254,13 +254,13 @@
 				<table class="dateTable">
 					<tr>
 						<td><label for="date" class="dateLabel">Date:</label></td>
-						<td><input type="text" class="userTextBox" name="date" id="date" readonly="true" value="<?php $dateXML = simplexml_load_file("XML/date.XML"); echo $dateXML->date; ?>"></td>
+						<td><input type="text" class="userTextBox" name="date" id="date" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->date; ?>"></td>
 					</tr>
 					
 					<tr>
 						<td><label for="date" class="dateLabel">Time:</label></td>
-						<td><input type="text" style="width:30px;" class="timeSpinner" name="date" id="hour" readonly="true" value="<?php $dateXML = simplexml_load_file("XML/date.XML"); echo $dateXML->hour; ?>">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
-						<input type="text" style="width:30px;" class="timeSpinner" name="date" id="min" readonly="true" value="<?php $dateXML = simplexml_load_file("XML/date.XML"); echo $dateXML->min; ?>"></td>
+						<td><input type="text" style="width:30px;" class="timeSpinner" name="date" id="hour" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->hour; ?>">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+						<input type="text" style="width:30px;" class="timeSpinner" name="date" id="min" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->min; ?>"></td>
 						
 					</tr>
 				</table><br>
