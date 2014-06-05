@@ -11,8 +11,12 @@
 		
 		<link rel="stylesheet" type="text/css" href="CSS/Index.css" />
 		<link rel="shortcut icon" type="image/x-icon" href="Images/favicon.ico" />
-		
+		<link rel="stylesheet" href="../../jquery-ui-1.10.2/themes/dark-hive-red/jquery-ui.css">
+
 		<script src="jquery-1.9.1.js" ></script>
+		<script src="jquery-ui-1.10.2/ui/jquery-ui.js"></script>
+
+
 		<script>
 			<?php 
 				require("slots.php");
@@ -20,40 +24,59 @@
 		
 			$(document).ready(function() 
 			{
+				$( "#database_error" ).dialog({
+					  autoOpen: false,  
+				      modal: true,
+				      resizable: false,
+				      draggable: false,
+				      width:450,
+				      show: 200,
+				      buttons: {
+				        Ok: function() {
+				          $( this ).dialog( "close" );
+				        }
+				      }
+				    });
+
 				$('.main').fadeIn("slow");
 			<?php 
 				ob_start();
 				include "get_names.php";
 				$names = ob_get_clean();
-				$names = json_decode($names);
-				ob_end_clean();
-				
-				$innerCircleCounter = 0;
-				$outerCircleCounter = 0;
-				$outsideTheCircleCounter = 0;
-				$userCounter = 0;
-				
-				foreach($names as $name => $position)
-				{
-					if($position == 3)
-					{
-						echo("$('.outsideTheCircle').prepend('<div class=\"name\" style=\"position:absolute;".$outsideTheCircleSlots[$outsideTheCircleCounter]."\">".$name."</div>');\n");
-						$outsideTheCircleCounter = $outsideTheCircleCounter + 1;
-					}
-					else if($position == 2)
-					{
-						echo("$('.outerCircle').append('<div class=\"name\" style=\"position:absolute;".$outerCircleSlots[$outerCircleCounter]."\">".$name."</div>');\n");
-						$outerCircleCounter = $outerCircleCounter + 1;
-					}
-					else if($position == 1)
-					{
-						echo("$('.innerCircle').append('<div class=\"name\" style=\"position:absolute;".$innerCircleSlots[$innerCircleCounter]. "\">".$name."</div>');\n");
-						$innerCircleCounter = $innerCircleCounter + 1;
-					}
-					
-					$userCounter = $userCounter + 1;
+				if($names == "db_connection_error" || $date == "table_error")
+				{	
+					echo ("$(\"#database_error\").dialog(\"open\");");
 				}
+				else
+				{
+					$names = json_decode($names);
+					ob_end_clean();
 				
+					$innerCircleCounter = 0;
+					$outerCircleCounter = 0;
+					$outsideTheCircleCounter = 0;
+					$userCounter = 0;
+				
+					foreach($names as $name => $position)
+					{
+						if($position == 3)
+						{
+							echo("$('.outsideTheCircle').prepend('<div class=\"name\" style=\"position:absolute;".$outsideTheCircleSlots[$outsideTheCircleCounter]."\">".$name."</div>');\n");
+							$outsideTheCircleCounter = $outsideTheCircleCounter + 1;
+						}
+						else if($position == 2)
+						{
+							echo("$('.outerCircle').append('<div class=\"name\" style=\"position:absolute;".$outerCircleSlots[$outerCircleCounter]."\">".$name."</div>');\n");
+							$outerCircleCounter = $outerCircleCounter + 1;
+						}
+						else if($position == 1)
+						{
+							echo("$('.innerCircle').append('<div class=\"name\" style=\"position:absolute;".$innerCircleSlots[$innerCircleCounter]. "\">".$name."</div>');\n");
+							$innerCircleCounter = $innerCircleCounter + 1;
+						}
+						$userCounter = $userCounter + 1;
+					}
+				}
 				
 			?>
 				
@@ -63,28 +86,36 @@
 					ob_start();
 					include "get_date.php";
 					$date = ob_get_clean();
-					$date = json_decode($date);
-					ob_end_clean();
-
-					foreach ($date as $key => $value) 
-					{
-						if($key == "next_date")
-						{
-							$next_date = $value;
-						}
-						else if($key == "hour")
-						{
-							$hour = $value;
-						}
-						else if($key == "min")
-						{
-							$min = $value;
-						}
+					if($date == "db_connection_error" || $date == "table_error")
+					{	
+						$next_nandos = new DateTime("01.01.2001");
+						$next_nandos->setTime(00,00);
+						echo ("$(\"#database_error\").dialog(\"open\");");
 					}
+					else
+					{
+						$date = json_decode($date);
+						ob_end_clean();
 
-					$next_nandos = new DateTime($next_date);
-					$next_nandos->setTime((int)$hour, (int)$min);
+						foreach ($date as $key => $value) 
+						{
+							if($key == "next_date")
+							{
+								$next_date = $value;
+							}
+							else if($key == "hour")
+							{
+								$hour = $value;
+							}
+							else if($key == "min")
+							{
+								$min = $value;
+							}
+						}
 
+						$next_nandos = new DateTime($next_date);
+						$next_nandos->setTime((int)$hour, (int)$min);
+					}
 				?>
 					var now = new Date();
 					var nextNandos = new Date(<?php echo($next_nandos->format('Y'));
@@ -100,6 +131,7 @@
 													echo($next_nandos->format('s'));
 													echo(",");
 													echo("0");
+
 					?>);
 				
 					
@@ -183,6 +215,12 @@
 		<div class="bottomBanner">
 			<a href="/admin" class="bottomBanner">Admin</a> | Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
+
+
+		<div id="database_error" title="Database Connection Error">
+			<p>Error connecting to the database. Please try again later.</p>
+		</div>
+
 	</body>	
 	<!--
 	
