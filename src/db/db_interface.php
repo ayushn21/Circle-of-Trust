@@ -4,9 +4,13 @@
 		$db_info_file = file_get_contents($db_info_path);
 		$db_info = json_decode($db_info_file,true);
 
-		$connection_string = "host=".$db_info['db_host']." port=".$db_info['port']." dbname=".$db_info['db_name'];
+		$connection_string = "";
 
-		return $connection_string;
+		foreach ($db_info as $key => $value) 
+		{
+			$connection_string .= $key."=".$value." ";
+		}
+		return trim($connection_string);
 	}
 
 	function get_names($db_connection)

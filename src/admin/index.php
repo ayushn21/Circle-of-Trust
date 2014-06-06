@@ -41,11 +41,20 @@
 
 		function login()
 		{
-			$.post("../Login/login.php",
+			if($("#username").val().trim().length < 1 || $("#pwd").val().trim().length < 1)
+			{	
+				$("#usernameError").css("display","none");	
+				$(".error").css("display","none");	
+				$("#usernameError").text("Please enter a username and password.");
+				$("#usernameError").fadeIn();
+			}
+			else
+			{
+				$.post("login/check_login.php",
 					{
-						username:$("#username").val(),pwd:$("#pwd").val()
+						username:$("#username").val().trim(),pwd:$("#pwd").val().trim()
 					},
-				function(data,status)
+					function(data,status)
 					{
 						if(data == "success" && status == "success")
 						{
@@ -55,7 +64,7 @@
 						{
 							$("#usernameError").css("display","none");	
 							$(".error").css("display","none");	
-							$("#usernameError").text("Check the Username or Password.");
+							$("#usernameError").text("Incorrect username and/or password. Please try again.");
 							$("#usernameError").fadeIn();
 						}
 						else
@@ -66,6 +75,7 @@
 							$("#usernameError").fadeIn();
 						}
 					});
+			}
 		}
 		
 		</script>
