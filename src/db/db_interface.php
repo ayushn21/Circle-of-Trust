@@ -87,4 +87,38 @@
 		$response = pg_execute($db_connection, "save_date_query",array($date["next_date"],(int)$date["hour"],(int)$date["min"]));
 		return $response;
 	}
+
+	function create_account($db_connection, $account)
+	{
+		$check_username = pg_prepare($db_connection, "check_username_query" ,"SELECT * FROM admins where username=$1");
+		$check_username = pg_execute($db_connection, "check_username_query" ,array($account["username"]));
+
+		if(pg_num_rows($check_username) > 0)
+		{
+			return "clash";
+		}
+		else
+		{
+			$response = pg_prepare($db_connection, "create_account_query" ,"INSERT INTO admins (username,password) VALUES ($1,$2)");
+			$response = pg_execute($db_connection, "create_account_query",array($account["username"],$account["password"]));
+			return $response;
+		}
+	}
+
+	function change_password($db_connection, $passwords, $user)
+	{
+		$check_password = pg_prepare($db_connection, "check_password_query" ,"SELECT password FROM admins WHERE username=$1");
+		$check_password = pg_execute($db_connection, "check_password_query" ,array($user));
+
+		if(pg_fetch_row($check_password)[0] != $passwords["old_password"])
+		{
+			return "clash";
+		}
+		else
+		{
+			$response = pg_prepare($db_connection, "change_password_query" ,"UPDATE admins SET password=$1 WHERE username=$2");
+			$response = pg_execute($db_connection, "change_password_query",array($passwords["new_password"],$user));
+			return $response;
+		}
+	}
 ?>

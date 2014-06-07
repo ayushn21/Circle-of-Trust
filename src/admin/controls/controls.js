@@ -58,9 +58,14 @@ function createAccountSubmit()
 	
 	if(flag)
 	{   
-		$.post("XML/createAccount.php",
+		var info_array = {};
+		info_array["username"] = $.trim($("#username").val());
+		info_array["password"] = $("#pwd").val();
+		var info_json = JSON.stringify(info_array);
+
+		$.post("save/create_account.php",
 				{
-					username:$.trim($("#username").val()),pwd:$("#pwd").val()
+					account_info:info_json
 				},
 			function(data,status){
 					if(data == "success" && status == "success")
@@ -76,9 +81,9 @@ function createAccountSubmit()
 				        	.addClass( "errorMessage");
 						$("#createAccountError").fadeIn(300);
 					}
-					else if(data == "notLoggedIn" && status == "success")
+					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("admin.php?login=1");
+						window.location.replace("../?login=1");
 					}
 					else
 					{
@@ -115,7 +120,7 @@ function saveDate()
 					}
 					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("admin.php?login=1");
+						window.location.replace("../?login=1");
 					}
 					else
 					{
@@ -184,7 +189,7 @@ function saveUsersToDB()
 							}
 							else if(data == "not_logged_in" && status == "success")
 							{
-								window.location.replace("admin.php?login=1");
+								window.location.replace("../?login=1");
 							}
 							else
 							{
@@ -237,9 +242,15 @@ function changePasswordSubmit()
 	
 	if(flag)
 	{   
-		$.post("XML/changePassword.php",
+		var password_array = {};
+		password_array["old_password"] = $.trim($("#oldPassword").val());
+		password_array["new_password"] = $.trim($("#newPassword").val());
+
+		var password_json = JSON.stringify(password_array);
+
+		$.post("save/change_password.php",
 				{
-					oldPassword:$.trim($("#oldPassword").val()),newPassword:$.trim($("#newPassword").val())
+					password_data:password_json
 				},
 			function(data,status){
 					if(data == "success" && status == "success")
@@ -255,9 +266,9 @@ function changePasswordSubmit()
 				        	.addClass( "errorMessage");
 						$("#changePasswordError").fadeIn(300);
 					}
-					else if(data == "notLoggedIn" && status == "success")
+					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("admin.php?login=1");
+						window.location.replace("../?login=1");
 					}
 					else
 					{

@@ -2,7 +2,7 @@
 	session_start();
 	if(!isset($_SESSION['user']))
 	{
-		header("location:admin.php?login=1");
+		header("location:../?login=1");
 	}
 ?>
 
@@ -275,12 +275,12 @@
 			<div class="controlButtons">
 				<input type="button" value="Create Account" class="controlButton" onclick="createAccount()" style="top:40px;font-size:25px; width:275px;">
 				<input type="button" value="Change Password" class="controlButton" onclick="changePassword()" style="top:50px;font-size:25px">
-				<input type="button" value="Logout" class="controlButton" onclick="location.href='Login/logout.php'" style="top:90px;font-size:25px">
+				<input type="button" value="Logout" class="controlButton" onclick="location.href='../login/logout.php'" style="top:90px;font-size:25px">
 			</div>
 		<div class="bottomBanner">
 			Built by Ayush Newatia. &copy; <img src="../../Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
-		
+
 		</div>
 		<br><br><br><br><br><br><br><br>
 		
