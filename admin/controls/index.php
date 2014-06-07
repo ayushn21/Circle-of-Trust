@@ -30,7 +30,6 @@
 					include "../../get_names.php";
 					$names = ob_get_clean();
 					$names = json_decode($names);
-					ob_end_clean();
 
 						foreach ($names as $name => $position)
 						{
@@ -250,7 +249,6 @@
 				ob_start();
 				include "../../get_date.php";
 				$date = ob_get_clean();
-				ob_end_clean();
 				$date = json_decode($date,true);
 			?>
 			<div class="nandosDate">

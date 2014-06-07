@@ -50,7 +50,6 @@
 				else
 				{
 					$names = json_decode($names,true);
-					ob_end_clean();
 				
 					$innerCircleCounter = 0;
 					$outerCircleCounter = 0;
@@ -95,7 +94,6 @@
 					else
 					{
 						$date = json_decode($date,true);
-						ob_end_clean();
 
 						$next_nandos = new DateTime($date["next_date"]);
 						$next_nandos->setTime((int)$date["hour"], (int)$date["min"]);
