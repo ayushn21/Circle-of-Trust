@@ -10,8 +10,7 @@
 		{
 			$connection_string .= $key."=".$value." ";
 		}
-		//return trim($connection_string);
-		return "host=ec2-54-243-47-196.compute-1.amazonaws.com port=5432 dbname=d9h3acggrealgo user=edcdherffqvgqv password=-7FpGzwOESpsK7qntoW2JF_LJx";
+		return trim($connection_string);
 	}
 
 	function get_names($db_connection)
