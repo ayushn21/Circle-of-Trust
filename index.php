@@ -1,7 +1,3 @@
-<?php 
-	ob_start();
-	ob_end_clean();
-?>
 <!DOCTYPE html>
 <html>
 	<head>
