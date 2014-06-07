@@ -133,3 +133,18 @@ input.controlButton
 {
 
 }
+.bottomBanner
+{
+	font-size:10px;
+	font-family:gillSans,sans-serif;
+	position:absolute;
+	bottom:-300px;
+	right:0px;
+	color:#d6222e;
+	text-align:right;
+	text-decoration:none;
+}
+a.bottomBanner:hover
+{
+	color:white;
+}

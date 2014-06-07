@@ -91,15 +91,21 @@ function createAccountSubmit()
 				 });
 	}		
 }
+
 function saveDate()
 {
 	if($("#date").val().length > 0)
 	{
-		$.post("XML/saveDate.php",
+		var date_array = {};
+		date_array["next_date"] = $("#date").val().trim();
+		date_array["hour"] = $("#hour").val().trim();
+		date_array["min"] = $("#min").val().trim();
+
+		var date_json = JSON.stringify(date_array);
+
+		$.post("save/save_date.php",
 				{
-					date:$("#date").val(),
-					hour:$("#hour").val(),
-					min:$("#min").val()
+					next_date: date_json
 				},
 			function(data,status)
 				{
@@ -107,7 +113,7 @@ function saveDate()
 					{
 						$("#dateSaved").dialog("open");
 					}
-					else if(data == "notLoggedIn" && status == "success")
+					else if(data == "not_logged_in" && status == "success")
 					{
 						window.location.replace("admin.php?login=1");
 					}
@@ -117,12 +123,11 @@ function saveDate()
 					}
 				});
 	}
-	
 }
-function saveUsersToXML()
+
+function saveUsersToDB()
 {
-				var usersArray = new Array();
-				var circleArray = new Array();
+				var usersArray = {};
 				var flag = true;
 				var counterFlag = true;
 				
@@ -130,43 +135,35 @@ function saveUsersToXML()
 				var outerCircleCount = 0;
 				var outsideTheCircleCount = 0;
 				
-				$("tr.userRow").each(function() {
-					  $this = $(this)
-					  usersArray.push($.trim($this.find("input.userTextBox").val()));
-					  circleArray.push($.trim($this.find("input.circleTextBox").val()));
-					});
+				$("tr.userRow").each(function() 
+				{
+					$this = $(this)
+					usersArray[$.trim($this.find("input.userTextBox").val())] = $.trim($this.find("input.circleTextBox").val());
+				});
 
-				$.each(usersArray, function(index,value)
-						{
-							if (value.length < 1)
-							{
-								flag = false;
-							}
-						});
-
-				$.each(circleArray, function(index,value)
-						{
-							var number = Number(value);
-							if (value > 3 || value < 1)
-							{
-								flag = false;
-							}
-							else
-							{
-								if(value == 1)
-								{
-									innerCircleCount = innerCircleCount + 1;
-								}
-								else if(value == 2)
-								{
-									outerCircleCount = outerCircleCount + 1;
-								}
-								else if(value == 3)
-								{
-									outsideTheCircleCount = outsideTheCircleCount + 1;
-								}
-							}
-						});
+				$.each(usersArray, function(user,position)
+				{
+					if(user.length > 9 || user.length < 1 || +position < 1 || +position > 3)
+					{
+						flag = false;
+					}
+					else
+					{
+						flag = true;
+					}
+					if(+position == 1)
+					{
+						innerCircleCount = innerCircleCount + 1;
+					}
+					else if(+position == 2)
+					{
+						outerCircleCount = outerCircleCount + 1;
+					}
+					else if(+position == 3)
+					{
+						outsideTheCircleCount = outsideTheCircleCount + 1;
+					}
+				});
 				
 				if(innerCircleCount > 12 || outerCircleCount > 10 || outsideTheCircleCount > 12)
 				{
@@ -175,16 +172,17 @@ function saveUsersToXML()
 
 				if(flag && counterFlag)
 				{
-				$.post("XML/saveXML.php",
+				var users_json = JSON.stringify(usersArray);
+				$.post("save/save_users_to_db.php",
 						{
-							users:usersArray,circle:circleArray
+							user_data:users_json
 						},
 					function(data,status){
 							if(data == "success" && status == "success")
 							{
 								$("#savedDialog").dialog("open");
 							}
-							else if(data == "notLoggedIn" && status == "success")
+							else if(data == "not_logged_in" && status == "success")
 							{
 								window.location.replace("admin.php?login=1");
 							}
@@ -192,7 +190,6 @@ function saveUsersToXML()
 							{
 								$("#errorDialog").dialog("open");
 							}
-							
 						 });
 				 }
 				else

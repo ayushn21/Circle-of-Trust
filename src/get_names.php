@@ -1,8 +1,8 @@
 <?php
 
-require_once('db/db_interface.php');
+require_once(__DIR__.'/db/db_interface.php');
 
-$connection_string = get_connection_string("db/dbinfo.json");
+$connection_string = get_connection_string(__DIR__."/db/dbinfo.json");
 $db_connection = pg_connect($connection_string);
 
 if($db_connection)

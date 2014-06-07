@@ -19,30 +19,29 @@
 		
 		<script src="../../jquery-1.9.1.js" ></script>
 		<script src="../../jquery-ui-1.10.2/ui/jquery-ui.js"></script>
-		<script src="../../Scripts/controls.js" ></script>
+		<script src="controls.js" ></script>
 		<script src="../../globalize.js" ></script>
 		
 		<script type="text/javascript">
 			$(document).ready(function() 
 			{
 				$('.main').fadeIn("slow");
-			<?php 
-						$namesXML = new DOMDocument();
-						$namesXML->load('../../XML/names.xml');
-					
-						$nameNode = $namesXML->getElementsByTagName("name");
-						$circleNode = $namesXML->getElementsByTagName("circle");
-						$i=0;
-						foreach ($nameNode as $n)
+				<?php 
+					ob_start();
+					include "../../get_names.php";
+					$names = ob_get_clean();
+					$names = json_decode($names);
+					ob_end_clean();
+
+						foreach ($names as $name => $position)
 						{
 							echo("$('.users').animate({height: '+=40'}, 0);");
 							echo("$('.usersTable').append('<tr class=\"userRow\">\\
-															<td><input type=\"text\" class=\"userTextBox\" maxlength=\"9\" value=\"".$n->nodeValue."\"></td>\\
-															<td><input class=\"circleTextBox\" readonly=\"true\" value=\"".$circleNode->item($i)->nodeValue."\"></td>\\
+															<td><input type=\"text\" class=\"userTextBox\" maxlength=\"9\" value=\"".$name."\"></td>\\
+															<td><input class=\"circleTextBox\" readonly=\"true\" value=\"".$position."\"></td>\\
 															<td style=\"font-size:14px;\"><input type=\"button\" value=\"Delete\" class=\"deleteUser\" onclick=\"deleteUser(this);\"></td>\\
 														  </tr>');
 														  ");
-							$i = $i+1;
 						}
 			?>
 				$("input[type=button]").button();
@@ -246,21 +245,27 @@
 				</table>
 				
 				<input type="button" value="Add User" class="controlButton" onclick="addUser()" style="top:50px;font-size:18px">
-				<input type="button" value="Save" class="controlButton" onclick="saveUsersToXML()" style="top:50px;font-size:18px">
+				<input type="button" value="Save" class="controlButton" onclick="saveUsersToDB()" style="top:50px;font-size:18px">
 			</div>
-			
+			<?php
+				ob_start();
+				include "../../get_date.php";
+				$date = ob_get_clean();
+				ob_end_clean();
+				$date = json_decode($date,true);
+			?>
 			<div class="nandosDate">
 				<div class="usersTitle">Next Nando's</div>
 				<table class="dateTable">
 					<tr>
 						<td><label for="date" class="dateLabel">Date:</label></td>
-						<td><input type="text" class="userTextBox" name="date" id="date" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->date; ?>"></td>
+						<td><input type="text" class="userTextBox" name="date" id="date" readonly="true" value="<?php echo $date["next_date"] ?>"></td>
 					</tr>
 					
 					<tr>
 						<td><label for="date" class="dateLabel">Time:</label></td>
-						<td><input type="text" style="width:30px;" class="timeSpinner" name="date" id="hour" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->hour; ?>">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
-						<input type="text" style="width:30px;" class="timeSpinner" name="date" id="min" readonly="true" value="<?php $dateXML = simplexml_load_file("../../XML/date.XML"); echo $dateXML->min; ?>"></td>
+						<td><input type="text" style="width:30px;" class="timeSpinner" name="date" id="hour" readonly="true" value="<?php echo $date["hour"] ?>">&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;
+						<input type="text" style="width:30px;" class="timeSpinner" name="date" id="min" readonly="true" value="<?php echo $date["min"] ?>"></td>
 						
 					</tr>
 				</table><br>
@@ -272,6 +277,9 @@
 				<input type="button" value="Change Password" class="controlButton" onclick="changePassword()" style="top:50px;font-size:25px">
 				<input type="button" value="Logout" class="controlButton" onclick="location.href='Login/logout.php'" style="top:90px;font-size:25px">
 			</div>
+		<div class="bottomBanner">
+			Built by Ayush Newatia. &copy; <img src="../../Images/dsotm.jpg" style="height:12px; width:auto;" />
+		</div>
 		
 		</div>
 		<br><br><br><br><br><br><br><br>
@@ -344,9 +352,6 @@
 					</tr>
 				</table>
 			</form>
-		</div>
-		<div class="bottomBanner">
-			Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
 	</body>
 </html>

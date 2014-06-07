@@ -49,7 +49,7 @@
 				}
 				else
 				{
-					$names = json_decode($names);
+					$names = json_decode($names,true);
 					ob_end_clean();
 				
 					$innerCircleCounter = 0;
@@ -94,27 +94,11 @@
 					}
 					else
 					{
-						$date = json_decode($date);
+						$date = json_decode($date,true);
 						ob_end_clean();
 
-						foreach ($date as $key => $value) 
-						{
-							if($key == "next_date")
-							{
-								$next_date = $value;
-							}
-							else if($key == "hour")
-							{
-								$hour = $value;
-							}
-							else if($key == "min")
-							{
-								$min = $value;
-							}
-						}
-
-						$next_nandos = new DateTime($next_date);
-						$next_nandos->setTime((int)$hour, (int)$min);
+						$next_nandos = new DateTime($date["next_date"]);
+						$next_nandos->setTime((int)$date["hour"], (int)$date["min"]);
 					}
 				?>
 					var now = new Date();
