@@ -18,7 +18,7 @@
 		<script src="jquery-ui-1.10.2/ui/jquery-ui.js"></script>
 
 
-		<script>"
+		<script>";
 
 				require("slots.php");
 			?>
