@@ -8,7 +8,15 @@ Inspired by lack of attendance at bi-weekly work Nando's lunches. Regular attend
 
 ### Usage
 
-Just download and host on a server supporting PHP. Homepage is Index.php and Internet Explorer is not supported at all.
+Internet Explorer is not supported at all.
+
+Just modify `db/dbinfo.json` according to your PostgreSQL installation and deploy to a PHP server. Load index.html to automatically create the schema and fill initial values in the database.
+
+To deploy to Heroku, simply clone the repo and push it to a Heroku app. Attach a Heroku Postgres instance to the app and update `dbinfo.json` accordingly.
+
+Currently the website is hosted [here](http://circle-of-trust.herokuapp.com/ "Nando's Circle of Trust"). 
+
+The below log in details are created by default by the schema and can be used to log into the above example instance.
 
 Default Login Details:
 
@@ -17,14 +25,11 @@ Password: Peri-Peri-Chicken!
 
 ### Technical Details
 
-EDIT: Currently in the process of being rewritted using PostgreSQL to enable deployment to Heroku.
-
-
-All functionality is coded using PHP, JavaScript, HTML, and CSS. No database is used, instead all data is stored in an XML file.
+All functionality is coded using PHP, JavaScript, HTML, and CSS. PostgreSQL is used as the database.
 
 Jquery UI is used for a lot of the UI elements.
 
-Default login details can be deleted after a new account has been created by modifying the users.xml file. No GUI system exists, sorry.
+Admin management screen in under construction.
 
 Passwords are not stored in clear text. MD5 hashes are used.
 

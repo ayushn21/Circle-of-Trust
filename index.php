@@ -195,7 +195,7 @@
 		</div>
 		<br><br><br>
 		<div class="bottomBanner">
-			<a href="/admin" class="bottomBanner">Admin</a> | Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
+			<a href="https://github.com/ayushn21/Circle-of-Trust" target="_blank" class="bottomBanner">GitHub</a> | <a href="/admin" class="bottomBanner">Admin</a> | Built by Ayush Newatia. &copy; <img src="Images/dsotm.jpg" style="height:12px; width:auto;" />
 		</div>
 
 
