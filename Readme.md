@@ -10,7 +10,7 @@ Inspired by lack of attendance at bi-weekly work Nando's lunches. Regular attend
 
 Internet Explorer is not supported at all.
 
-Just modify `db/dbinfo.json` according to your PostgreSQL installation and deploy to a PHP server. Load index.html to automatically create the schema and fill initial values in the database.
+Just modify `db/dbinfo.json` according to your PostgreSQL installation and deploy to a PHP server. Load `index.php` to automatically create the schema and fill initial values in the database.
 
 To deploy to Heroku, simply clone the repo and push it to a Heroku app. Attach a Heroku Postgres instance to the app and update `dbinfo.json` accordingly.
 
