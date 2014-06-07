@@ -1,5 +1,6 @@
 {
-	"host":"localhost",
+	"host":"ec2-54-243-47-196.compute-1.amazonaws.com",
 	"port":"5432",
-	"dbname":"test"
+	"dbname":"d9h3acggrealgo",
+	"user":"edcdherffqvgqv"
 }
