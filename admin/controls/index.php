@@ -5,7 +5,7 @@
 		header("location:../?login=1");
 	}
 ?>
-
+<?php ?>
 <!DOCTYPE html>
 <html>
 	<head>
