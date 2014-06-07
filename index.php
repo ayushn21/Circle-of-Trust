@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?php echo 
+"<!DOCTYPE html>
 <html>
 	<head>
 		<title>Nando's Circle of Trust</title>
@@ -17,8 +18,8 @@
 		<script src="jquery-ui-1.10.2/ui/jquery-ui.js"></script>
 
 
-		<script>
-			<?php 
+		<script>"
+
 				require("slots.php");
 			?>
 		
