@@ -1,4 +1,3 @@
-
 .buildpath
 
 .project
@@ -7,4 +6,4 @@
 
 .settings/org.eclipse.wst.common.project.facet.core.xml
 
-src/test.php
+test.php
