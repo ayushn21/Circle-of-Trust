@@ -83,7 +83,7 @@ function createAccountSubmit()
 					}
 					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("../?login=1");
+						window.location.replace("/admin/?login=1");
 					}
 					else
 					{
@@ -120,7 +120,7 @@ function saveDate()
 					}
 					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("../?login=1");
+						window.location.replace("/admin/?login=1");
 					}
 					else
 					{
@@ -189,7 +189,7 @@ function saveUsersToDB()
 							}
 							else if(data == "not_logged_in" && status == "success")
 							{
-								window.location.replace("../?login=1");
+								window.location.replace("/admin/?login=1");
 							}
 							else
 							{
@@ -268,7 +268,7 @@ function changePasswordSubmit()
 					}
 					else if(data == "not_logged_in" && status == "success")
 					{
-						window.location.replace("../?login=1");
+						window.location.replace("/admin/?login=1");
 					}
 					else
 					{
