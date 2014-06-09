@@ -10,9 +10,9 @@ Inspired by lack of attendance at bi-weekly work Nando's lunches. Regular attend
 
 Internet Explorer is not supported at all.
 
-Just modify `db/dbinfo.json` according to your PostgreSQL installation and deploy to a PHP server. Load `index.php` to automatically create the schema and fill initial values in the database.
+Just modify the JSON string in Line 4 of `db/db_interface.php` according to your PostgreSQL installation and deploy to a PHP server. Load `index.php` to automatically create the schema and fill initial values in the database.
 
-To deploy to Heroku, simply clone the repo and push it to a Heroku app. Attach a Heroku Postgres instance to the app and update `dbinfo.json` accordingly.
+To deploy to Heroku, simply clone the repo and push it to a Heroku app. Attach a Heroku Postgres instance to the app and update the JSON string in `db_interface.php` accordingly.
 
 Currently the website is hosted [here](http://circle-of-trust.herokuapp.com/ "Nando's Circle of Trust"). 
 
