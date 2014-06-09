@@ -7,7 +7,7 @@ if (isset($_SESSION['user']))
 		require_once(__DIR__."/../../db/db_interface.php");
 		$users = json_decode($_POST["user_data"],true);
 
-		$db_connection = pg_connect(get_connection_string(__DIR__."/../../db/dbinfo.json"));
+		$db_connection = pg_connect(get_connection_string());
 		$response = save_names($db_connection,$users);
 		if($response)
 		{

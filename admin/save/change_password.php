@@ -10,7 +10,7 @@ if (isset($_SESSION['user']))
 		$passwords["old_password"] = hash("md5",$passwords["old_password"]);		
 		$passwords["new_password"] = hash("md5",$passwords["new_password"]);
 
-		$db_connection = pg_connect(get_connection_string(__DIR__."/../../db/dbinfo.json"));
+		$db_connection = pg_connect(get_connection_string());
 		$response = change_password($db_connection,$passwords,$_SESSION['user']);
 		if($response == "clash")
 		{

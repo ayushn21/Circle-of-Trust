@@ -6,7 +6,7 @@ if(isset($_POST['username']) && isset($_POST['pwd']))
 	$password_input = hash("md5",$_POST["pwd"]);
 
 	require_once("../../db/db_interface.php");
-	$connection_string = get_connection_string("../../db/dbinfo.json");
+	$connection_string = get_connection_string();
 
 	$db_connection = pg_connect($connection_string);
 

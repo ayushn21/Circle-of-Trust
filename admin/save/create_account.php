@@ -8,7 +8,7 @@ if (isset($_SESSION['user']))
 		$account = json_decode($_POST["account_info"],true);
 		$account["password"] = hash("md5",$account["password"]);
 
-		$db_connection = pg_connect(get_connection_string(__DIR__."/../../db/dbinfo.json"));
+		$db_connection = pg_connect(get_connection_string());
 		$response = create_account($db_connection,$account);
 		if($response == "clash")
 		{

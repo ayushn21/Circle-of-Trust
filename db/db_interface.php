@@ -1,7 +1,7 @@
 <?php
-	function get_connection_string($db_info_path)
+	function get_connection_string()
 	{
-		$db_info_file = file_get_contents($db_info_path);
+		$db_info_file = '{"host":"ec2-54-243-47-196.compute-1.amazonaws.com","dbname":"d9h3acggrealgo","user":"edcdherffqvgqv","port":"5432","password":"-7FpGzwOESpsK7qntoW2JF_LJx"}';
 		$db_info = json_decode($db_info_file,true);
 
 		$connection_string = "";

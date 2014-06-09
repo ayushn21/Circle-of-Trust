@@ -7,7 +7,7 @@ if (isset($_SESSION['user']))
 		require_once(__DIR__."/../../db/db_interface.php");
 		$date = json_decode($_POST["next_date"],true);
 
-		$db_connection = pg_connect(get_connection_string(__DIR__."/../../db/dbinfo.json"));
+		$db_connection = pg_connect(get_connection_string());
 		$response = save_date($db_connection,$date);
 		if($response)
 		{
