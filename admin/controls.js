@@ -280,5 +280,5 @@ function changePasswordSubmit()
 					}
 				 });
 	}
-
+//With the words of a port, the voice of a choir and a melody, nothing else matters...
 }
