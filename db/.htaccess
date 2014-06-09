@@ -1,8 +1,0 @@
-RewriteEngine On
-RewriteBase /
-
-# Protect the htaccess file
-<Files "dbinfo.json">
-Order Allow,Deny
-Deny from all
-</Files>
