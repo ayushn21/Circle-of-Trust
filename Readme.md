@@ -23,13 +23,13 @@ Default Login Details:
 Username: admin    
 Password: Peri-Peri-Chicken!
 
+Admins can be managed from the "Manage Admins" screen after logging in.
+
 ### Technical Details
 
 All functionality is coded using PHP, JavaScript, HTML, and CSS. PostgreSQL is used as the database.
 
 Jquery UI is used for a lot of the UI elements.
-
-Admin management screen in under construction.
 
 Passwords are not stored in clear text. MD5 hashes are used.
 
