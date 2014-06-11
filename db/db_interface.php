@@ -51,6 +51,24 @@
 		}
 	}
 
+	function get_admin_info($db_connection)
+	{
+		$result = pg_query($db_connection, "SELECT username,manager FROM admins");
+		if($result)
+		{
+			$output = array_fill_keys(array(), '');
+			while($row = pg_fetch_row($result))
+			{
+				$output[$row[0]] = $row[1];
+			}
+			return json_encode($output);
+		}
+		else
+		{
+			return "table_error";
+		}
+	}
+
 	function save_names($db_connection, $names)
 	{
 		$result = pg_query($db_connection,"DELETE FROM names; ALTER SEQUENCE names_id_seq RESTART WITH 1;");
@@ -99,8 +117,8 @@
 		}
 		else
 		{
-			$response = pg_prepare($db_connection, "create_account_query" ,"INSERT INTO admins (username,password) VALUES ($1,$2)");
-			$response = pg_execute($db_connection, "create_account_query",array($account["username"],$account["password"]));
+			$response = pg_prepare($db_connection, "create_account_query" ,"INSERT INTO admins (username,password,manager) VALUES ($1,$2,$3)");
+			$response = pg_execute($db_connection, "create_account_query",array($account["username"],$account["password"],$account["manager"]));
 			return $response;
 		}
 	}
@@ -120,5 +138,39 @@
 			$response = pg_execute($db_connection, "change_password_query",array($passwords["new_password"],$user));
 			return $response;
 		}
+	}
+
+	function revoke_manager($db_connection, $username)
+	{
+		$revoke = pg_prepare($db_connection, "revoke_query", 'UPDATE admins SET manager=false WHERE username=$1');
+		$revoke = pg_execute($db_connection, "revoke_query", array($username));
+		return $revoke;
+	}
+
+	function get_manager_count($db_connection)
+	{
+		$managers_check = pg_query($db_connection, 'SELECT username FROM admins WHERE manager=true');
+		return pg_num_rows($managers_check);
+	}
+
+
+	function grant_manager($db_connection, $username)
+	{
+		$grant = pg_prepare($db_connection, "grant_query", 'UPDATE admins SET manager=true WHERE username=$1');
+		$grant = pg_execute($db_connection, "grant_query", array($username));
+		return $grant;
+	}
+
+	function get_admin_count($db_connection)
+	{
+		$admins_check = pg_query($db_connection, 'SELECT * FROM admins');
+		return pg_num_rows($admins_check);
+	}
+
+	function delete_admin($db_connection,$username)
+	{
+		$delete = pg_prepare($db_connection, "delete_query", 'DELETE FROM admins WHERE username=$1');
+		$delete = pg_execute($db_connection, "delete_query", array($username));
+		return $delete;
 	}
 ?>

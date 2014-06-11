@@ -10,7 +10,7 @@ if(isset($_POST['username']) && isset($_POST['pwd']))
 
 	$db_connection = pg_connect($connection_string);
 
-	$result = pg_prepare($db_connection, "login_query", "SELECT username,password FROM admins WHERE username=$1 and password=$2");
+	$result = pg_prepare($db_connection, "login_query", "SELECT username,password,manager FROM admins WHERE username=$1 and password=$2");
 	$result = pg_execute($db_connection, "login_query", array($username_input,$password_input));
 
 	$no_of_results = pg_num_rows($result);
@@ -19,6 +19,7 @@ if(isset($_POST['username']) && isset($_POST['pwd']))
 	{
 		session_start();
 		$_SESSION['user'] = $username_input;
+		$_SESSION['manager'] = pg_fetch_row($result)[2];
 		echo "success";
 	}
 	else

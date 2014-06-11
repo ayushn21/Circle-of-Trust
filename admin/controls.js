@@ -15,7 +15,10 @@ function deleteUser(row)
 				$(row).parent().parent().remove();
 				$('.users').animate({height: '-=40'}, 500);
 			}
-
+function addHeightToControlButtons()
+{
+	$('.controlButtons').animate({height: '+=100'}, 0);
+}
 function createAccount()
 {
 	$("#createAccount").dialog("open");
@@ -24,6 +27,11 @@ function createAccount()
 function changePassword()
 {
 	$("#changePassword").dialog("open");
+}
+function manageAdmins()
+{
+	$("#manageAdmins").load("admins_management_screen.php");
+	$("#manageAdmins").dialog("open");
 }
 
 function createAccountSubmit()
@@ -61,6 +69,15 @@ function createAccountSubmit()
 		var info_array = {};
 		info_array["username"] = $.trim($("#username").val());
 		info_array["password"] = $("#pwd").val();
+		if($("#managerCheckbox").is(':checked'))
+		{
+			info_array["manager"] = "true";
+		}
+		else
+		{
+			info_array["manager"] = "false";
+		}
+
 		var info_json = JSON.stringify(info_array);
 
 		$.post("save/create_account.php",
@@ -280,5 +297,157 @@ function changePasswordSubmit()
 					}
 				 });
 	}
-//With the words of a port, the voice of a choir and a melody, nothing else matters...
 }
+
+function getUsernameForRow(row)
+{
+	var table_row = $(row).closest("tr");
+	return $(table_row).find("td:first").html();	
+}
+
+function grantManagerClick(row)
+{
+	var username = getUsernameForRow(row);
+
+	$("#grantName").html(username);
+	$("#confirmationGrant").dialog("open");
+}
+
+function revokeManagerClick(row)
+{
+	var username = getUsernameForRow(row);
+
+	$("#revokeName").html(username);
+	$("#confirmationRevoke").dialog("open");
+}
+
+function deleteAdminClick(row)
+{	
+	var username = getUsernameForRow(row);
+
+	$("#deleteName").html(username);
+	$("#confirmationDelete").dialog("open");
+}
+
+function grantManager(username)
+{
+	$("#confirmationGrant").dialog( "close" );
+	$.post("grant_manager.php",
+		{
+			username:username
+		},
+		function(data,status){
+		if(data == "success" && status == "success")
+			{
+				$("#manageAdmins").dialog("close");
+				manageAdmins();
+				$("#permissionGranted").dialog("open");
+			}
+			else if(data == "not_logged_in" && status == "success")
+			{
+				window.location.replace("/admin/?login=1");
+			}
+			else
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("Error. Please try again.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+	 });
+
+}
+
+function revokeManager(username)
+{
+	$("#confirmationRevoke").dialog( "close" );
+	$.post("revoke_manager.php",
+		{
+			username:username
+		},
+		function(data,status){
+		if(data == "success" && status == "success")
+			{
+				$("#manageAdmins").dialog("close");
+				manageAdmins();
+				$("#permissionRevoked").dialog("open");
+			}
+			else if(data == "not_logged_in" && status == "success")
+			{
+				window.location.replace("/admin/?login=1");
+			}
+			else if(data == "one_left" && status == "success")
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("You cannot delete the last manager.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+			else if(data == "cannot_delete_self" && status == "success")
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("You cannot revoke your own permissions.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+			else
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("Error. Please try again.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+	 });
+}
+
+function deleteAdmin(username)
+{
+	$("#confirmationDelete").dialog( "close" );
+	$.post("delete_admin.php",
+		{
+			username:username
+		},
+		function(data,status){
+		if(data == "success" && status == "success")
+			{
+				$("#manageAdmins").dialog("close");
+				manageAdmins();
+				$("#adminDeleted").dialog("open");
+			}
+			else if(data == "not_logged_in" && status == "success")
+			{
+				window.location.replace("/admin/?login=1");
+			}
+			else if(data == "one_left" && status == "success")
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("You cannot delete the last admin.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+			else if(data == "cannot_delete_self" && status == "success")
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("You cannot delete yourself.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+			else
+			{
+				$("#manageAdminsError").css("display","none");
+				$("#manageAdminsError")
+				        	.text("Error. Please try again.")
+				        	.addClass( "errorMessage");
+				$("#manageAdminsError").fadeIn(300);
+			}
+	 });
+
+}
+
+//With the words of a port, the voice of a choir and a melody, nothing else matters...
