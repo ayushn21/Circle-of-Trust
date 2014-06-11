@@ -66,6 +66,8 @@
 			?>
 				$("input[type=button]").button();
 
+				$(document).tooltip();
+
 				  $(function() {
 					    $( "#date" ).datepicker({dateFormat: "dd.mm.yy"});
 					  });

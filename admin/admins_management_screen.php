@@ -21,9 +21,9 @@
 					<td colspan="4"><span id="manageAdminsError"></span></td>
 				</tr>
 				<tr>
-					<td>Username</td>
-					<td>Manager?</td>
-					<td>Permission</td>
+					<td title="Administrator's username">Username</td>
+					<td title="Does the Administrator have manager privileges">Manager?</td>
+					<td title="Grant or revoke manager privileges">Permission</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
