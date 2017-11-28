@@ -14,7 +14,7 @@ Just modify the JSON string in Line 4 of `db/db_interface.php` according to your
 
 To deploy to Heroku, simply clone the repo and push it to a Heroku app. Attach a Heroku Postgres instance to the app and update the JSON string in `db_interface.php` accordingly.
 
-Currently the website is hosted [here](http://circle-of-trust.herokuapp.com/ "Nando's Circle of Trust"). 
+Currently the website is hosted [here]( https://nandoscircleoftrust.herokuapp.com/ "Nando's Circle of Trust"). 
 
 The below log in details are created by default by the schema and can be used to log into the above example instance.
 
