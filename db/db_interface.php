@@ -1,7 +1,7 @@
 <?php
 	function get_connection_string()
 	{
-		$db_info_file = '{"host":"ec2-54-197-241-78.compute-1.amazonaws.com","dbname":"dbfik2r7lmmqbm","user":"fzqxuxyonfqoag","port":"5432","password":"53wRLwOVDPyqYDR1Q9zTgZ_tif"}';
+		$db_info_file = '{"host":"ec2-50-16-204-127.compute-1.amazonaws.com","dbname":"kzrhmoduhbmpli","user":"dd16680db656a26062739e329ffbe7541567f2b41aeb715e7a05789b59721479","port":"5432","password":"ddbnutdvrulrad"}';
 		$db_info = json_decode($db_info_file,true);
 
 		$connection_string = "";
